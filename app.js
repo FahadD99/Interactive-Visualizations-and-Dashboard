@@ -4,7 +4,7 @@ const data = 'data/samples.json';
 // Using d3, fetch the JSON data
 d3.json(data).then((data) => {
 
-    ///////////////// CREATE SUBJECT DROPDOWN /////////////////
+    
     // Set reference to all test subject IDs
     var names = data.names;
     // Reference the select id for the subject dropdown
@@ -21,7 +21,6 @@ d3.json(data).then((data) => {
         selectSubject.appendChild(opt);
     })
 
-    // Create a function to update the page with plots and demographic info
     function updatePage() {
         // Create a reference to the data's metadata array
         var metadata = data.metadata;
@@ -32,7 +31,7 @@ d3.json(data).then((data) => {
         // Using a for-loop, create the demographic info and the gauge plot
         metadata.forEach((m) => {
         
-        ///////////////// CREATE DEMOGRAPHIC INFO /////////////////
+      
 
         // If the id in the metadata matches the selected id
         if (m.id == selectedID) {
@@ -47,7 +46,7 @@ d3.json(data).then((data) => {
                 <b>Belly Button Type:</b> ${m.bbtype} <br> 
                 <b>Wash Frequency:</b> ${m.wfreq} <br> `;
 
-            ///////////////// CREATE GAUGE PLOT /////////////////
+           
                 
             // Create an array from 9 to 0 
             var numArray = Array.from({length: 10}, (v,k) => k).reverse();
@@ -60,12 +59,12 @@ d3.json(data).then((data) => {
                 // Identify plot type and displays value beneath gauge plot
                 mode: "gauge+number",
                 gauge: {
-                    // Adjust axis range and tick marks
+                    // Adjust axis range and tick marks - thank you for the idea Dan
                     axis: { range: [null, 9], 
                             ticktext:  numArray,
                             tickvals: numArray
                     },
-                    // Create sections based on the provided ranges and adjusts section colour 
+                   
                     steps: [
                         {range: [8, 9], color: "rgba(0,105,11,1)"},
                         {range: [7, 8], color: "rgba(10,120,22,1)"},
@@ -87,7 +86,7 @@ d3.json(data).then((data) => {
                     }
                 }
             };
-            // Create the data array for the plot
+            // Create the data array for the plot- great idea Dan, thank you.
             var gaugeData = [gaugeTrace];
             // Plot the chart to a div tag with id "gauge"
             Plotly.newPlot("gauge", gaugeData);
@@ -108,7 +107,7 @@ d3.json(data).then((data) => {
             var sampleValues = sample.sample_values;
             var otuLabels = sample.otu_labels;
 
-            ///////////////// CREATE BUBBLE PLOT /////////////////
+         
 
             // Create trace
             var bubbleTrace = {
@@ -146,7 +145,7 @@ d3.json(data).then((data) => {
     // Reverse the list to ensure it is in descending order
     var reversed = sliced.reverse();
 
-    ///////////////// CREATE BAR CHART /////////////////
+    // Dan appreciate the help with the graphing
 
     // Create trace
     var barTrace = {
